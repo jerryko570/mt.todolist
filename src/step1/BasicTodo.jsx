@@ -20,29 +20,22 @@ const BasicTodo = () => {
   ]);
   // TODO: 1. 할 일 입력을 위한 state 생성
 
-  // TODO: 2. 입력 처리를 위한 state를 useState 로 정의합니다.
-
-  // TODO: 3. 할 일 추가 함수 구현
+  // TODO: 2. 할 일 추가 함수 구현
   const addTodo = () => {};
 
-  // TODO: 4. 완료/미완료 토글 함수 구현
+  // TODO: 3. 완료/미완료 토글 함수 구현
   const toggleTodoState = (index) => {};
 
-  // TODO: 5. 할 일 삭제 함수 구현
+  // TODO: 4. 할 일 삭제 함수 구현
   const deleteTodo = (index) => {};
 
-  // TODO: 6. Enter 키 처리 함수 (한국어 입력 고려)
+  // TODO: 5. Enter 키 처리 함수 (한국어 입력 고려)
   const handleKeyDown = (e) => {};
-
-  // TODO: 7. 입력 시작/끝 처리
-  const handleCompositionStart = () => {};
-
-  const handleCompositionEnd = () => {};
 
   return (
     <TodoContainer>
       <TodoCard>
-        {/* TODO: 9. 입력 폼 구현 */}
+        {/* TODO: 6. 입력 폼 구현 */}
         <InputContainer>
           <TodoInput
             type="text"
@@ -50,13 +43,11 @@ const BasicTodo = () => {
             value={""} // 1번의 state 적용
             onChange={(e) => {}} // 1번의 setState 적용
             onKeyDown={handleKeyDown}
-            onCompositionStart={handleCompositionStart}
-            onCompositionEnd={handleCompositionEnd}
           />
           <AddButton onClick={addTodo}>추가</AddButton>
         </InputContainer>
 
-        {/* TODO: 10. 할 일 목록 렌더링 */}
+        {/* TODO: 7. 할 일 목록 렌더링 */}
         <TodoList>
           {todoList.length === 0 ? (
             <EmptyState>
