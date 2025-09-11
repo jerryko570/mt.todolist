@@ -1,0 +1,19 @@
+.todo-container {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.todo-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.input-container {
+    margin-bottom: 32px;
+    display: flex;
+    gap: 12px;
+}

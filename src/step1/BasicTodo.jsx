@@ -1,17 +1,6 @@
 import { useState } from "react";
 import TodoItem from "./TodoItem";
-import {
-  TodoContainer,
-  TodoCard,
-  InputContainer,
-  TodoInput,
-  AddButton,
-  TodoList,
-  EmptyState,
-  EmptyText,
-  EmptySubText,
-  TodoItems,
-} from "../components/shared/styles";
+import "./BasicTodo.css";
 
 const BasicTodo = () => {
   const [todoList, setTodoList] = useState([
@@ -21,41 +10,45 @@ const BasicTodo = () => {
   // TODO: 1. 할 일 입력을 위한 state 생성
 
   // TODO: 2. 할 일 추가 함수 구현
-  const addTodo = () => {};
+  const addTodo = () => { };
 
   // TODO: 3. 완료/미완료 토글 함수 구현
-  const toggleTodoState = (index) => {};
+  const toggleTodoState = (index) => { };
 
   // TODO: 4. 할 일 삭제 함수 구현
-  const deleteTodo = (index) => {};
+  const deleteTodo = (index) => { };
 
   // TODO: 5. Enter 키 처리 함수 (한국어 입력 고려)
-  const handleKeyDown = (e) => {};
+  const handleKeyDown = (e) => { };
 
   return (
-    <TodoContainer>
-      <TodoCard>
+    <div className="todo-container">
+      <div className="todo-card">
         {/* TODO: 6. 입력 폼 구현 */}
-        <InputContainer>
-          <TodoInput
+        <div className="input-container">
+          <input
+            className="todo-input"
             type="text"
             placeholder="새로운 할 일을 입력하세요..."
-            value={""} // 1번의 state 적용
-            onChange={(e) => {}} // 1번의 setState 적용
+            /* TODO: 7. input 값 채우기 */
+            // value={} // 1번의 state 적용
+            onChange={(e) => { }} // 1번의 setState 적용
             onKeyDown={handleKeyDown}
           />
-          <AddButton onClick={addTodo}>추가</AddButton>
-        </InputContainer>
+          <button className="add-button" onClick={addTodo}>
+            추가
+          </button>
+        </div>
 
-        {/* TODO: 7. 할 일 목록 렌더링 */}
-        <TodoList>
+        {/* TODO: 8. 할 일 목록 렌더링 */}
+        <div className="todo-list">
           {todoList.length === 0 ? (
-            <EmptyState>
-              <EmptyText>할 일이 없습니다</EmptyText>
-              <EmptySubText>새로운 할 일을 추가해보세요</EmptySubText>
-            </EmptyState>
+            <div className="empty-state">
+              <p className="empty-text">할 일이 없습니다</p>
+              <p className="empty-subtext">새로운 할 일을 추가해보세요</p>
+            </div>
           ) : (
-            <TodoItems>
+            <div className="todo-items">
               {todoList.map((todo, index) => (
                 <TodoItem
                   key={index}
@@ -65,11 +58,11 @@ const BasicTodo = () => {
                   deleteTodo={deleteTodo}
                 />
               ))}
-            </TodoItems>
+            </div>
           )}
-        </TodoList>
-      </TodoCard>
-    </TodoContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 
