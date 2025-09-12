@@ -1,12 +1,75 @@
-# React + Vite
+# TODO LIST
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React와 useState를 이용하여 기본적인 투두리스트를 구현하는 실습 프로젝트입니다.
 
-Currently, two official plugins are available:
+## BasicTodo.jsx 구현하기
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+BasicTodo.jsx 투두 입력 인풋, 투두 목록을 렌더링합니다.
+TodoItem.jsx 투두 아이템 목록을 렌더링합니다.
+```
 
-## Expanding the ESLint configuration
+### 1. 할 일 입력을 위한 state 생성
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+useState를 이용하여 input에 들어갈 값을 정의합니다.
+기본값은 빈 문자열("")로 설정하며, 사용자가 입력한 내용을 담을 변수와 해당 값을 변경할 수 있는 setter 함수를 생성합니다.
+
+### 2. 할 일 추가 함수 구현
+
+값을 추가할 때는 기존 배열을 스프레드 연산자로 복사한 뒤 새로운 변수에 담습니다.
+변수에 담은 배열의 마지막에 새로운 객체를 추가합니다.
+이때 객체는 기존 배열과 동일하게 job, state를 가져야 합니다.
+state는 기본적으로 "미완료" 상태로 설정합니다.
+추가 후에는 입력 필드를 비워주어야 합니다.
+
+### 3. 완료/미완료 토글 함수 구현
+
+선택된 인덱스의 할 일 상태를 변경하는 함수입니다.
+기존 배열을 복사한 후, 해당 인덱스의 state 값을 "완료"와 "미완료" 사이에서 변경합니다.
+삼항 연산자를 활용하여 현재 상태가 "완료"이면 "미완료"로, "미완료"이면 "완료"로 바꿉니다.
+
+### 4. 할 일 삭제 함수 구현
+
+선택된 인덱스의 할 일을 배열에서 제거하는 함수입니다.
+filter 메서드를 사용하여 현재 인덱스와 다른 요소들만 남겨두고 새로운 배열을 만듭니다.
+
+### 5. Enter 키 처리 함수 (한국어 입력 고려)
+
+키보드 이벤트를 처리하는 함수입니다.
+한국어 입력 시 발생하는 중복 처리를 방지하기 위해 isComposing 속성을 확인합니다.
+Enter 키가 눌리고 한국어 입력이 완료된 상태일 때만 할 일 추가 함수를 호출합니다.
+
+### 6-7. 입력 폼 구현
+
+input 태그의 value 속성에는 1번에서 만든 상태 변수를 연결합니다.
+onChange 이벤트에서는 이벤트 객체의 target.value를 사용하여 상태를 업데이트합니다.
+
+### 8. 할 일 목록 렌더링
+
+todoList 배열을 map 메서드로 순회하면서 각각의 TodoItem 컴포넌트를 렌더링합니다.
+각 TodoItem에는 todo 객체, index, 그리고 필요한 함수들을 props로 전달합니다.
+
+## TodoItem.jsx 구현하기
+
+### 1. props 구조분해할당으로 받기
+
+컴포넌트 매개변수에서 필요한 props들을 구조분해할당으로 받습니다.
+todo, index, 그리고 부모에서 전달받은 함수들을 개별 변수로 추출합니다.
+
+### 2. 체크박스 구현
+
+체크박스의 onChange 이벤트에서 부모로부터 받은 토글 함수를 호출합니다.
+현재 아이템의 인덱스를 인자로 전달하여 어떤 할 일의 상태를 변경할지 알려줍니다.
+
+### 3. 할 일 내용 표시
+
+todo 객체의 job 속성 값을 화면에 표시합니다.
+
+### 4. 상태 표시 배지
+
+삼항 연산자를 이용하여 todo.state가 "완료"이면 "완료", 아니면 "미완료"를 표시합니다.
+
+### 5. 삭제 버튼 구현
+
+삭제 버튼의 onClick 이벤트에서 부모로부터 받은 삭제 함수를 호출합니다.
+현재 아이템의 인덱스를 인자로 전달하여 어떤 할 일을 삭제할지 알려줍니다.
