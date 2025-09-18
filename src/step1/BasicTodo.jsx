@@ -13,18 +13,32 @@ const BasicTodo = () => {
   // TODO: 2. 할 일 추가 함수 구현
   const addTodo = () => {
     if (todo.trim() === "") return;
-    const 
-      setTodo([...todo]);
+    const newTodo = { job: todo, state: "미완료" };
+    setTodoList([...todoList, newTodo]);
+    setTodo("");
   };
 
   // TODO: 3. 완료/미완료 토글 함수 구현
-  const toggleTodoState = (index) => {};
-
+  const onToggle = (index) => {
+    setTodoList((prev) =>
+      prev.map((item, i) =>
+        i === index
+          ? { ...item, state: item.state === "완료" ? "미완료" : "완료" }
+          : item
+      )
+    );
+  };
   // TODO: 4. 할 일 삭제 함수 구현 (여기까지 구현하기!)
-  const deleteTodo = (index) => {};
+  const deleteTodo = (index) => {
+    setTodoList((prev) => prev.filter((_, i) => i !== index));
+  };
 
   // TODO: 5. Enter 키 처리 함수 (한국어 입력 고려)
-  const handleKeyDown = (e) => {};
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.isComposing) {
+      addTodo();
+    }
+  };
 
   return (
     <div className="todo-container">
@@ -36,9 +50,7 @@ const BasicTodo = () => {
             type="text"
             placeholder="새로운 할 일을 입력하세요..."
             value={todo}
-            /* TODO: 7. input 값 채우기 */
-            // value={} // 1번의 state 적용
-            onChange={(e) => setTodo(e.target.value)} // 1번의 setState 적용
+            onChange={(e) => setTodo(e.target.value)}
             onKeyDown={handleKeyDown}
           />
           <button className="add-button" onClick={addTodo}>
@@ -46,7 +58,6 @@ const BasicTodo = () => {
           </button>
         </div>
 
-        {/* TODO: 8. 할 일 목록 렌더링 */}
         <div className="todo-list">
           {todoList.length === 0 ? (
             <div className="empty-state">
@@ -57,11 +68,11 @@ const BasicTodo = () => {
             <div className="todo-items">
               {todoList.map((todo, index) => (
                 <TodoItem
-                  key={index}
+                  key={todo.id}
                   todo={todo}
                   index={index}
-                  toggleTodoState={toggleTodoState}
-                  deleteTodo={deleteTodo}
+                  onToggle={onToggle}
+                  onDelete={onDelete}
                 />
               ))}
             </div>
